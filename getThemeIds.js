@@ -93,19 +93,32 @@
           var xmlNodes = xmlDoc.documentElement.getElementsByTagName('theme');
           for (var i = 0; i < xmlNodes.length; i++) {
             var themeXml = xmlNodes[i];
-            var name = `<div class="name">${ themeXml.getElementsByTagName('name')[0].innerHTML}</div>`;
-            var id = `<div class="id">${ themeXml.getElementsByTagName('id')[0].innerHTML}</div>`;
+            var id = themeXml.getElementsByTagName('id')[0].innerHTML;
+            var name = themeXml.getElementsByTagName('name')[0].innerHTML;
+
+            var nameHtml = `<div class="name">${ name }</div>`;
+            var idHtml = `<div class="id">${ id }</div>`;
             var themeNode = document.createElement('div');
-            themeNode.innerHTML = (name + id).trim();
+            themeNode.innerHTML = (nameHtml + idHtml).trim();
             var themeDate = new Date(themeXml.getElementsByTagName('updated-at')[0].innerHTML);
             themeNode.setAttribute('sec', (Math.abs(themeDate) / 1000));
             var currentDate = new Date();
             var diffDays = Math.ceil(Math.abs(currentDate - themeDate) / (1000 * 60 * 60 * 24));
+
+            themeNode.addEventListener('click', function() {
+              var clickedId = this.querySelector('.id').innerHTML;
+              var dummy = document.createElement('textarea');
+              dummy.value = clickedId;
+              document.body.appendChild(dummy);
+              dummy.select();
+              document.execCommand('copy');
+              document.body.removeChild(dummy);
+            });
+
             if (themeXml.getElementsByTagName('role')[0].innerHTML === 'main') {
               themeNode.className = 'theme theme--live';
               themeNodes.prepend(themeNode);
-            }
-            else if (diffDays <= 60) {
+            } else if (diffDays <= 60) {
               themeNode.className = 'theme';
               themeNodes.appendChild(themeNode);
             }
