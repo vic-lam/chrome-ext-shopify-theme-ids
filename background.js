@@ -1,3 +1,17 @@
 chrome.browserAction.onClicked.addListener(function(tab) {
-    chrome.tabs.executeScript(tab.id, {file: "getThemeIds.js"})
+  var theTabs;
+  
+  chrome.tabs.query({currentWindow: true}, function (tabs) {
+    tabs.forEach(function (tb) {
+      chrome.tabs.sendMessage(tabs[0].id, { url: tb.url }, function (res) {
+        // console.log('BG:res received', res.message);
+      });
+    });
+  })
+
+  function getThemeIds() {
+    chrome.tabs.executeScript(tab.id, { file: "getThemeIds.js" });
+  }
+
+  chrome.tabs.executeScript(tab.id, { code: "var testVar = " + JSON.stringify(theTabs) + ";" }, getThemeIds);
 });
