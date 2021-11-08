@@ -12,7 +12,9 @@
     "default_icon": "icon-32.png",
     "default_title": "Shopify Theme IDs"
   },
-  "background": {"scripts": ["background.js"]},
+  "background": {
+    "page": "/src/html/background.html"
+  },
   "permissions": [
     "tabs",
     "activeTab",
@@ -24,5 +26,8 @@
       "matches": ["http://*/*","https://*/*"],
       "css": ["getThemeIds.css"]
     }
+  ],
+  "web_accessible_resources" : [
+    "nonAdminInjection.js"
   ]
 }

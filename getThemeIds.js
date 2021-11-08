@@ -1,4 +1,6 @@
- (function () {
+// import { copyToClipboard } from "/helpers.js";
+
+(function () {
     var you = '...you uncultured fool!';
 
     /****************************************************************************************************
@@ -6,6 +8,7 @@
     ****************************************************************************************************/
 
     function copyIdToClipboard(themeElement) {
+      // copyToClipboard();
       var clickedId = themeElement.querySelector('.id').innerHTML;
       var dummy = document.createElement('textarea');
       dummy.value = clickedId;
@@ -77,12 +80,20 @@
       return themeNode;
     }
 
+    function injectScript(file, node) {
+      var th = document.getElementsByTagName(node)[0];
+      var s = document.createElement('script');
+      s.setAttribute('type', 'text/javascript');
+      s.setAttribute('src', file);
+      th.appendChild(s);
+    }
+
 
 
     /****************************************************************************************************
     * ON TABS URLS RECEIVED
     ****************************************************************************************************/
-    console.log('content:main:start', testVar);
+    // console.log('content:main:start', testVar);
 
     chrome.runtime.onMessage.addListener(
       function (req, sender, respond) {
@@ -133,9 +144,8 @@
       }
   
       req.send();
-   }
-   else {
-    alert('Go to a shopify admin page' + you);
-   }
+  } else {
+    injectScript(chrome.extension.getURL('nonAdminInjection.js'), 'body');
+  }
    
 })();
