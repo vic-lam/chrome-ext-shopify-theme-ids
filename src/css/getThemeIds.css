@@ -1,7 +1,7 @@
-#vpvThemes {
+#vpvModal {
   position: fixed;
   top: 16px;
-  right: 16px;
+  right: -600px;
   z-index: 900;
   width: 500px;
   height: 600px;
@@ -12,8 +12,12 @@
   background-color: #F3F3F3;
   box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
   border: 2px solid #B1B1B1;
+  animation: slidein 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
-#vpvThemes::after {
+#vpvModal.closing {
+  animation: slideout 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+#vpvModal::after {
   content: "";
   position: absolute;
   bottom: 24px;
@@ -32,14 +36,14 @@
   width: 100%;
   background-color: rgba(0,0,0,0.2);
 }
-#vpvThemes .themes {
+#vpvModal .themes {
   position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow-y: scroll;
 }
-#vpvThemes .themes .theme {
+#vpvModal .themes .theme {
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -52,17 +56,17 @@
   cursor: pointer;
   transition: transform 0.4s;
 }
-#vpvThemes .themes .theme.press {
+#vpvModal .themes .theme.press {
   transform: translate(2px, 2px);
 }
-#vpvThemes .themes .theme .name {
+#vpvModal .themes .theme .name {
   color: #2D2B3A;
 }
-#vpvThemes .themes .theme .id {
+#vpvModal .themes .theme .id {
   color: #63607C;
   font-weight: 500;
 }
-#vpvThemes .themes .theme .copied {
+#vpvModal .themes .theme .copied {
   position: absolute;
   top: 0;
   left: 0;
@@ -75,16 +79,46 @@
   transition: opacity 1s;
   border-radius: 4px;
 }
-#vpvThemes .themes .theme .copied.fade {
+#vpvModal .themes .theme .copied.fade {
   opacity: 0;
 }
-#vpvThemes .themes .theme.theme--live {
+#vpvModal .themes .theme.theme--live {
   background-color: #927DEC;
 }
-#vpvThemes .themes .theme.theme--live .name {
+#vpvModal .themes .theme.theme--live .name {
   color: #FFF;
 }
-#vpvThemes .themes .theme.theme--live .id {
+#vpvModal .themes .theme.theme--live .id {
   color: #FFF;
   font-weight: 500;
+}
+
+
+
+/****************************************************************************************************
+* KEYFRAMES
+****************************************************************************************************/
+
+@keyframes slidein {
+  from {
+    opacity: 0;
+    transform: translateX(0px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-616px);
+  }
+}
+
+@keyframes slideout {
+  from {
+    opacity: 1;
+    transform: translateX(-616px);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(0px);
+  }
 }
