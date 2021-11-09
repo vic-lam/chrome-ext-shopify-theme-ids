@@ -28,6 +28,6 @@
     }
   ],
   "web_accessible_resources" : [
-    "nonAdminInjection.js"
+    "/src/js/nonAdminInjection.js"
   ]
 }

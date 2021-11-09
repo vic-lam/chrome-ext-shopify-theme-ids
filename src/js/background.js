@@ -10,7 +10,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
   })
 
   function getThemeIds() {
-    chrome.tabs.executeScript(tab.id, { file: "getThemeIds.js" });
+    chrome.tabs.executeScript(tab.id, { file: "/src/js/getThemeIds.js" });
   }
 
   chrome.tabs.executeScript(tab.id, { code: "var testVar = " + JSON.stringify(theTabs) + ";" }, getThemeIds);

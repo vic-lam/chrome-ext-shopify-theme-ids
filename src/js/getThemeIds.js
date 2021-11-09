@@ -145,7 +145,7 @@
   
       req.send();
   } else {
-    injectScript(chrome.extension.getURL('nonAdminInjection.js'), 'body');
+    injectScript(chrome.extension.getURL('/src/js/nonAdminInjection.js'), 'body');
   }
    
 })();
