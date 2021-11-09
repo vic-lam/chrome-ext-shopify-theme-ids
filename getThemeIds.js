@@ -104,7 +104,7 @@
     )
     
 
-    if (window.location.host.includes('myshopify.com')) {
+    if (window.location.href.includes('myshopify.com/admin')) {
       var message = '';
       var xmlUrl = 'https://' + window.location.host + '/admin/themes.xml';
       var req = new XMLHttpRequest();
