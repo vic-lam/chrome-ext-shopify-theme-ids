@@ -23,18 +23,23 @@
       var xmlDoc = parser.parseFromString(response, 'text/xml');
       var xmlNodes = xmlDoc.documentElement.getElementsByTagName('theme');
       var themesArr = [];
+      var liveTheme;
+
       for (var i = 0; i < xmlNodes.length; i++) {
         var themeXml = xmlNodes[i];
         var id = themeXml.getElementsByTagName('id')[0].innerHTML;
         var name = themeXml.getElementsByTagName('name')[0].innerHTML;
         var lastUpdated = new Date(themeXml.getElementsByTagName('updated-at')[0].innerHTML);
-        var classes = (themeXml.getElementsByTagName('role')[0].innerHTML === 'main') ? 'theme theme--live' : 'theme';
+        var isLive = themeXml.getElementsByTagName('role')[0].innerHTML === 'main';
+        var classes = isLive ? 'theme theme--live' : 'theme';
         var themeObj = { id, name, lastUpdated, classes };
-  
+
+        if (isLive) {
+          liveTheme = themeObj;
+        }
+        
         if (themesArr.length === 0) {
           themesArr.push(themeObj);
-        } else if (themeXml.getElementsByTagName('role')[0].innerHTML === 'main') {
-          var liveTheme = themeObj;
         } else {
           for (var j = 0; j < themesArr.length; j++) {
             const existingTheme = themesArr[j];
