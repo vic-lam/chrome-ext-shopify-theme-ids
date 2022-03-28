@@ -15,7 +15,7 @@
         for (var i = 0; i < themesArray.length; i++) {
           var themeData = themesArray[i];
           if (themeData) {
-            var themeNode = window.__CESTI.admin.returnThemeNode(themeData, window.__CESTI.admin.copyIdToClipboard);
+            var themeNode = window.__CESTI.admin.returnThemeNode(themeData);
             window.__CESTI.modal.els.content.appendChild(themeNode);
           }
         }
