@@ -14,8 +14,10 @@
         var themesArray = window.__CESTI.admin.returnThemesArray(req.response);
         for (var i = 0; i < themesArray.length; i++) {
           var themeData = themesArray[i];
-          var themeNode = window.__CESTI.admin.returnThemeNode(themeData, window.__CESTI.admin.copyIdToClipboard);
-          window.__CESTI.modal.els.content.appendChild(themeNode);
+          if (themeData) {
+            var themeNode = window.__CESTI.admin.returnThemeNode(themeData, window.__CESTI.admin.copyIdToClipboard);
+            window.__CESTI.modal.els.content.appendChild(themeNode);
+          }
         }
 
         window.__CESTI.modal.open();
